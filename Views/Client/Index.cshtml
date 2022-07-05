@@ -1,0 +1,51 @@
+﻿@model IEnumerable<ClientModel>
+
+@{
+
+}
+
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+
+            <h1>Clientes</h1>
+            @if (!String.IsNullOrEmpty(Convert.ToString(TempData["mensagem"])))
+            {
+                <h2>@Convert.ToString(TempData["mensagem"])</h2>
+            }
+            
+
+
+            <p class="toolbar">
+                <a class="create btn btn-dark" href="/client/NewClient">Novo Cliente</a>
+            </p>
+            <table class="table table-striped" border="1" cellspacing="0" cellpadding="0">
+                <thead>
+                    <tr>
+                        <th data-field="id">Id</th>
+                        <th data-field="name">Nome</th>
+                        <th class="actions" width="220">Ações</th>
+                    </tr>
+                </thead>
+                <tbody>
+
+
+                    @foreach (var client in Model)
+                    {
+                        <tr>
+                        <td data-field="id">@client.ClientId</td>
+                        <td data-field="name">@client.Name </td>
+                        <td class="actions" width="220">
+                            <a href="/client/detales/@client.ClientId" class="btn btn-info btn-sm">Detalhe</a>
+                            <a href="/client/edit/@client.ClientId" class="btn btn-warning btn-sm">Editar</a>
+                        </td>
+                        </tr>
+                    }
+                    
+                  
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

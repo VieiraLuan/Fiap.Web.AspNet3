@@ -1,0 +1,42 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+<h1> Cadastro de Veiculos</h1>
+
+<div class="mb-3">
+    <form action="/Car/Registration" method="post">
+        <input type="hidden" name="CarroId" value="" />
+        <label for="MarcaCarro" class="form-label"> Marca </label>
+        <input type="text" required class="form-control" id="MarcaCarro" name="MarcaCarro" placeholder="Ex: Volkswagen">
+
+        <label for="NomeCarro" class="form-label"> Nome </label>
+        <input type="text" required name="NomeCarro" class="form-control" id="NomeCarro" placeholder="Ex: Polo">
+
+        <label for="ModeloCarro" class="form-label"> Modelo </label>
+        <input type="text" required   name="ModeloCarro" class="form-control" id="ModeloCarro" placeholder="Ex: Highline , Confortline ">
+
+      
+
+        <label for="KmCarro" class="form-label"></label>
+        <input type="text" required  name="KmCarro" class="form-control" id="KmCarro" placeholder="Ex: 35.000">
+
+          <select  name="Ano Carro" class="form-select" multiple aria-label="multiple select example">
+            <option selected> Selecione o Ano </option>
+            <option value="2019">2019</option>
+            <option value="2020">2020</option>
+            <option value="2021">2021</option>
+        </select>
+
+        <div class="mb-3">
+            <label for="FotoCarro" class="form-label">Default file input example</label>
+            <input  name="FotoCarro" class="form-control" type="file" id="FotoCarro">
+        </div>
+
+        <a href="/Car" class="btn btn-default btn-lg">Cancelar</a>
+        <button type="submit" class="btn btn-primary btn-lg">Gravar</button>
+    </form>
+
+</div>
