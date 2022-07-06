@@ -25,6 +25,19 @@ namespace Fiap.Web.AspNet3.Controllers
             return RedirectToAction("Index");
         }
 
+        public IActionResult Edit()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult Edit(CarModel carModel)
+        {
+            return RedirectToAction("Index");
+        }
+
+
+
 
 
     }
