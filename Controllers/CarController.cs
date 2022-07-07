@@ -12,7 +12,19 @@ namespace Fiap.Web.AspNet3.Controllers
 
         public IActionResult Detales()
         {
-            return View();
+            var carModel = new CarModel
+            {
+                CarrroId = 1,
+                MarcaCarro = "Vw",
+                NomeCarro = "UP TSI",
+                ModeloCarro = "Pepper",
+                AnoCarro = 2020,
+                KmCarro = 35000,
+                FotoCarro = ""
+
+            };
+
+            return View(carModel);
         }
 
         public IActionResult Registration()
@@ -22,18 +34,41 @@ namespace Fiap.Web.AspNet3.Controllers
         [HttpPost]
         public IActionResult Registration(CarModel carModel)
         {
-            return RedirectToAction("Index");
+
+            if (ModelState.IsValid)
+            {
+                TempData["mensagem"] = "Carro Cadastrado com Sucesso! ";
+                return RedirectToAction("Index");
+            }
+            else
+            {
+                return View(carModel);
+            }
+
         }
 
         public IActionResult Edit()
         {
+            
+
             return View();
         }
 
         [HttpPost]
         public IActionResult Edit(CarModel carModel)
         {
-            return RedirectToAction("Index");
+            if (ModelState.IsValid)
+            {
+                TempData["mensagem"] = "Carro alterado com Sucesso!";
+                return RedirectToAction("Index");
+
+
+            }
+            else
+            {
+                return View(carModel);
+            }
+
         }
 
 

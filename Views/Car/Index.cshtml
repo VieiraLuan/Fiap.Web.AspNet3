@@ -7,8 +7,12 @@
             <div class="col-md-12">
 
                 <p class="toolbar">
-                    <a class="create btn btn-dark" href="/Car/Registration">Novo Carro</a>
+                    <a class="create btn btn-dark"asp-controller="Car" asp-action="Registration">Novo Carro</a>
                 </p>
+                @if (!String.IsNullOrEmpty(Convert.ToString(TempData["mensagem"])))
+                {
+                    <div class="alert alert-warning" role="alert">@TempData["mensagem"]</div>                    
+                }
                 <table class="table table-striped" border="1" cellspacing="0" cellpadding="0">
                     <thead>
                         <tr>
@@ -32,8 +36,8 @@
                             <td data-field="year">2020</td>
                             <td> SIM </td>
                             <td class="actions" width="220">
-                                <a href="/Car/Detales" class="btn btn-info btn-sm">Detalhe</a>
-                                <a href="/Car/Edit" class="btn btn-warning btn-sm">Editar</a>
+                                <a asp-controller="Car" asp-action="Detales" class="btn btn-info btn-sm">Detalhe</a>
+                                <a asp-controller="Car" asp-action="Edit" class="btn btn-warning btn-sm">Editar</a>
                             </td>
                         </tr>
 

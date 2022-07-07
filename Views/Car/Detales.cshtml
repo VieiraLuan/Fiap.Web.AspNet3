@@ -1,34 +1,36 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
-}
+﻿@model CarModel
+
+<h1> Alteração de Carros</h1>
+
+<div class="mb-3">
+    <form >
+
+        <label class="form-label" asp-for="MarcaCarro"></label>
+        <input readonly class="form-control" asp-for="MarcaCarro">
+    
+
+        <label class="form-label" asp-for="NomeCarro"></label>
+        <input readonly class="form-control" asp-for="NomeCarro">
+      
+
+        <label class="form-label" asp-for="ModeloCarro">  </label>
+        <input readonly class="form-control" asp-for="ModeloCarro">
+      
+
+        <label class="form-label" asp-for="KmCarro"> </label>
+        <input readonly type="text" class="form-control" asp-for="KmCarro">
 
 
-<div class="centered">
+        <label class="form-label" asp-for="AnoCarro"> </label>
+        <input readonly type="text" class="form-control" asp-for="AnoCarro">
+       
 
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-sm">
-                <div class="card" style="width: 18rem;">
-                    <img src="./Images/Amarok-V6-Extreme-2.jpg" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <p class="card-text">Codigo: 1 </p>
-                        <p class="card-text">Marca: VW </p>
-                        <p class="card-text">Nome: UP! TSI </p>
-                        <p class="card-text">Modelo: Pepper </p>
-                        <p class="card-text">KM: 35.000 </p>
-                        <p class="card-text">Ano: 2020 </p>
-
-                        <a href="/Car/Edit" class="btn btn-info btn-sm">Editar</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+        <label class="form-label" asp-for="FotoCarro"> </label>
+        <input readonly type="text" class="form-control" asp-for="FotoCarro">
 
 
-
+        <a class="btn btn-default btn-lg" asp-controller="Car" asp-action="Index">Voltar</a>
+        
+    </form>
 
 </div>
-

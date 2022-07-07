@@ -13,7 +13,7 @@ namespace Fiap.Web.AspNet3.Models
         [Display(Name = "Nome")]
         [MaxLength(70, ErrorMessage = "Tamanho máximo do nome é 70 caracteres")]
         [Required(ErrorMessage = "Campo Obrigatório")]
-        [MinLength(2, ErrorMessage ="Digite um nome com mais de 2 caracteres")]
+        [MinLength(2, ErrorMessage = "Digite um nome com mais de 2 caracteres")]
         public string Name { get; set; }
 
 
@@ -25,7 +25,7 @@ namespace Fiap.Web.AspNet3.Models
 
         [Display(Name = "Data de Nascimento")]
         [Required(ErrorMessage = "Campo Obrigatório")]
-        [DataType(DataType.Date,ErrorMessage ="Campo Obrigatório")]
+        [DataType(DataType.Date, ErrorMessage = "Campo Obrigatório")]
         public DateTime? Birth { get; set; } /*Quando definimos DataType ou EmailAdrres
                                               automaticamente no Form os campos se tornar do mesmo type*/
 
@@ -35,7 +35,7 @@ namespace Fiap.Web.AspNet3.Models
 
         [Display(Name = "Observação")] /*Display name é o nome que iremos definir dentro do label
                                         no html*/
-       
+
         public string? Observation { get; set; }
 
 
