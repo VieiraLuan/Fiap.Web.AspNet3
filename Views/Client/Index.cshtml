@@ -1,4 +1,4 @@
-﻿@model IEnumerable<ClientModel>
+﻿@model IEnumerable<ClientModel> /*Carregamos a lista que vem do banco de dados*/
 
 @{
 
@@ -11,14 +11,14 @@
 
             <h1>Clientes</h1>
             @if (!String.IsNullOrEmpty(Convert.ToString(TempData["mensagem"])))
-            {
-                <h2>@Convert.ToString(TempData["mensagem"])</h2>
+            {/*Passamos via Temp Data Status das Operações feitas pelo usuario
+                ex: Cadastrado com Sucesso
+                ex: Alterado com Sucesso etc*/
+                <div class="alert alert-warning" role="alert">@TempData["mensagem"]</div>
             }
-            
-
 
             <p class="toolbar">
-                <a class="create btn btn-dark" href="/client/NewClient">Novo Cliente</a>
+                <a class="create btn btn-dark" asp-controller="Client" asp-action="NewClient">Novo Cliente</a>
             </p>
             <table class="table table-striped" border="1" cellspacing="0" cellpadding="0">
                 <thead>
@@ -32,20 +32,29 @@
 
 
                     @foreach (var client in Model)
-                    {
+                    {/*Criamos para cada obj na lista do Model passado acima uma linha na Tabela
+                        e passamos campo a campo para exibição na tela
+                        
+                        asp-route serve para passar o id via HttpGet para fins de consulta , alteração e etc*/
                         <tr>
-                        <td data-field="id">@client.ClientId</td>
-                        <td data-field="name">@client.Name </td>
-                        <td class="actions" width="220">
-                            <a href="/client/detales/@client.ClientId" class="btn btn-info btn-sm">Detalhe</a>
-                            <a href="/client/edit/@client.ClientId" class="btn btn-warning btn-sm">Editar</a>
-                        </td>
+                            <td data-field="id">@client.ClientId </td>
+                            <td data-field="name">@client.Name </td>
+                            <td class="actions" width="220">
+                                <a asp-controller="Client" asp-action="Detales" asp-route-id="@client.ClientId" class="btn btn-info btn-sm">Detalhe</a>
+                                <a asp-controller="Client" asp-action="Edit" asp-route-id="@client.ClientId" class="btn btn-warning btn-sm">Editar</a>
+                            </td>
                         </tr>
                     }
-                    
-                  
+
+
                 </tbody>
             </table>
         </div>
     </div>
 </div>
+
+<h4> @ViewBag.MessageObs </h4>
+<h4>
+    @TempData["MessageTemp"]
+</h4>
+
