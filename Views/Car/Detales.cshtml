@@ -1,21 +1,24 @@
 ﻿@model CarModel
+@{
+    Layout = "_LayoutDark";
+}
 
 <h1> Alteração de Carros</h1>
 
 <div class="mb-3">
-    <form >
+    <form>
 
         <label class="form-label" asp-for="MarcaCarro"></label>
         <input readonly class="form-control" asp-for="MarcaCarro">
-    
+
 
         <label class="form-label" asp-for="NomeCarro"></label>
         <input readonly class="form-control" asp-for="NomeCarro">
-      
+
 
         <label class="form-label" asp-for="ModeloCarro">  </label>
         <input readonly class="form-control" asp-for="ModeloCarro">
-      
+
 
         <label class="form-label" asp-for="KmCarro"> </label>
         <input readonly type="text" class="form-control" asp-for="KmCarro">
@@ -23,14 +26,24 @@
 
         <label class="form-label" asp-for="AnoCarro"> </label>
         <input readonly type="text" class="form-control" asp-for="AnoCarro">
-       
+
 
         <label class="form-label" asp-for="FotoCarro"> </label>
         <input readonly type="text" class="form-control" asp-for="FotoCarro">
 
 
         <a class="btn btn-default btn-lg" asp-controller="Car" asp-action="Index">Voltar</a>
-        
+
     </form>
 
 </div>
+
+@section Scripts{
+    <script src="https://code.jquery.com/ui/1.13.1/jquery-ui.min.js"></script>
+}
+
+    @section Menu{
+    <li class="nav-item">
+        <a class="nav-link text-dark" asp-area="" asp-controller="" asp-action="">Fake</a>
+    </li>
+        }

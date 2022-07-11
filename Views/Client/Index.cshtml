@@ -1,8 +1,5 @@
 ﻿@model IEnumerable<ClientModel> /*Carregamos a lista que vem do banco de dados*/
 
-@{
-
-}
 
 
 <div class="container">
@@ -12,8 +9,8 @@
             <h1>Clientes</h1>
             @if (!String.IsNullOrEmpty(Convert.ToString(TempData["mensagem"])))
             {/*Passamos via Temp Data Status das Operações feitas pelo usuario
-                ex: Cadastrado com Sucesso
-                ex: Alterado com Sucesso etc*/
+            ex: Cadastrado com Sucesso
+            ex: Alterado com Sucesso etc*/
                 <div class="alert alert-warning" role="alert">@TempData["mensagem"]</div>
             }
 
@@ -33,17 +30,21 @@
 
                     @foreach (var client in Model)
                     {/*Criamos para cada obj na lista do Model passado acima uma linha na Tabela
-                        e passamos campo a campo para exibição na tela
-                        
-                        asp-route serve para passar o id via HttpGet para fins de consulta , alteração e etc*/
-                        <tr>
-                            <td data-field="id">@client.ClientId </td>
-                            <td data-field="name">@client.Name </td>
-                            <td class="actions" width="220">
-                                <a asp-controller="Client" asp-action="Detales" asp-route-id="@client.ClientId" class="btn btn-info btn-sm">Detalhe</a>
-                                <a asp-controller="Client" asp-action="Edit" asp-route-id="@client.ClientId" class="btn btn-warning btn-sm">Editar</a>
-                            </td>
-                        </tr>
+                            e passamos campo a campo para exibição na tela
+
+                            asp-route serve para passar o id via HttpGet para fins de consulta , alteração e etc*/
+                        /* <tr>
+                        <td data-field="id">@client.ClientId </td>
+                        <td data-field="name">@client.Name </td>
+                        <td class="actions" width="220">
+                        <a asp-controller="Client" asp-action="Detales" asp-route-id="@client.ClientId" class="btn btn-info btn-sm">Detalhe</a>
+                        <a asp-controller="Client" asp-action="Edit" asp-route-id="@client.ClientId" class="btn btn-warning btn-sm">Editar</a>
+                        </td>
+                        </tr>*/
+
+                        /*Mesma coisa que a de cima mas com conceito de partial view*/
+
+                        <partial name="_ClientItem" model="client" />
                     }
 
 
