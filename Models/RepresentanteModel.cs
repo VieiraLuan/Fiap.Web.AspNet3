@@ -27,8 +27,8 @@ namespace Fiap.Web.AspNet3.Models
         [StringLength(100)]
         public string? NomeRepresentante { get; set; }
 
-        [NotMapped]
-        public string Token { get; set; }
+        /*[NotMapped]
+        public string Token { get; set; }*/
 
     }
 }

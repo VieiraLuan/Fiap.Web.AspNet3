@@ -13,6 +13,7 @@ namespace Fiap.Web.AspNet3.Data
 
         //public DbSet<ClientModel> Clients { get; set; } 
 
+        public DbSet<GerenteModel> Gerentes { get; set; }
 
         public DataContext(DbContextOptions options) : base(options)
         {/*Construtor*/
