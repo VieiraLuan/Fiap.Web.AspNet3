@@ -26,7 +26,13 @@ namespace Fiap.Web.AspNet3.Repository
 
         public List<GerenteModel> FindByName(string name)
         {
+            if(name != null)
+            {
+                return dataContext.Gerentes.ToList<GerenteModel>();
+            }
+
             return null;
+           
         }
 
         public void Insert(GerenteModel gerenteModel)

@@ -1,4 +1,5 @@
-﻿using Fiap.Web.AspNet3.Models;
+﻿using Fiap.Web.AspNet3.Data;
+using Fiap.Web.AspNet3.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
@@ -7,6 +8,10 @@ namespace Fiap.Web.AspNet3.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+
+       
+
+       
 
         public HomeController(ILogger<HomeController> logger)
         {

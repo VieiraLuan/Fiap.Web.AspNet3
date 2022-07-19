@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Fiap.Web.AspNet3.Migrations
 {
     [DbContext(typeof(FornecedoresRepository))]
-    [Migration("20220714003135_GerenteModel")]
-    partial class GerenteModel
+    [Migration("20220718222817_fornecedorModel")]
+    partial class fornecedorModel
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -23,6 +23,39 @@ namespace Fiap.Web.AspNet3.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
+
+            modelBuilder.Entity("Fiap.Web.AspNet3.Models.FornecedorModel", b =>
+                {
+                    b.Property<int>("FornecedorId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasColumnName("FornecedorId");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("FornecedorId"), 1L, 1);
+
+                    b.Property<string>("Cnpj")
+                        .IsRequired()
+                        .HasMaxLength(14)
+                        .HasColumnType("nvarchar(14)");
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("FornecedorNome")
+                        .IsRequired()
+                        .HasMaxLength(70)
+                        .HasColumnType("nvarchar(70)");
+
+                    b.Property<string>("Telefone")
+                        .IsRequired()
+                        .HasMaxLength(11)
+                        .HasColumnType("nvarchar(11)");
+
+                    b.HasKey("FornecedorId");
+
+                    b.ToTable("Fornecedor");
+                });
 
             modelBuilder.Entity("Fiap.Web.AspNet3.Models.GerenteModel", b =>
                 {
