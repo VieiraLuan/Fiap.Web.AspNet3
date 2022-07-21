@@ -35,9 +35,8 @@ namespace Fiap.Web.AspNet3.Repository
         }
         public void Delete(int id)
         {
-            ClientModel clienteModel = new ClientModel();
-            clienteModel.ClientId = 1;
-            Delete(clienteModel);
+            var cliente = FindById(id);
+            Delete(cliente);
         }
         public void Delete(ClientModel ClienteModel)
         {
