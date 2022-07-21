@@ -16,10 +16,10 @@
                     e para qual metodo ele vai cair
                     asp-controler para controler
                     asp-action para qual o metodo
-                    
-                    definimos um SPAN para retornar se tem algum campo que não está no padrao das Annotations 
+
+                    definimos um SPAN para retornar se tem algum campo que não está no padrao das Annotations
                     definidas na Model
-                    
+
                     asp-for ajuda na inclusão de deficientes e aciona todos as anotations da model
                     asp-validation pega as anotation do model*/
                     <form asp-action="NewClient" asp-controller="Client" method="post">
@@ -43,10 +43,35 @@
                             <textarea class="form-control" asp-for="Observation"></textarea>
                             <span class="text-danger" asp-validation-for="Observation"></span>
                         </div>
+
+                        <div class="form-group">
+                            <label class="control-label" asp-for="RepresentanteId">Representante</label>
+                            <select name="RepresentanteId">
+                                <option value="">Selecione</option>
+                                @foreach (var representante in ViewBag.representantes)
+                                {
+                                    if (representante.RepresentanteId == Model.RepresentanteId)
+                                    {
+                                        <option selected value="@representante.RepresentanteId">@representante.NomeRepresentante</option>
+                                    }
+                                    else
+                                    {
+                                        <option value="@representante.RepresentanteId">@representante.NomeRepresentante</option>
+                                    }
+                                    
+                                }
+                            </select>
+                            <span class="text-danger" asp-validation-for="RepresentanteId"></span>
+                        </div>
+
+
+
+
                         <a asp-action="Index" asp-controller="Client" class="btn btn-default btn-lg">Cancelar</a>
                         <button type="submit" class="btn btn-primary btn-lg">Gravar</button>
                     </form>
-                /*No Link podemos substituir o href por um action e um controler para redirecionar*/}
+                    /*No Link podemos substituir o href por um action e um controler para redirecionar*/
+                }
             </div>
         </div>
     </div>

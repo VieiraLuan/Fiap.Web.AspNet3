@@ -1,92 +1,54 @@
-﻿using Fiap.Web.AspNet3.Models;
+﻿using Fiap.Web.AspNet3.Data;
+using Fiap.Web.AspNet3.Models;
+using Fiap.Web.AspNet3.Repository;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Fiap.Web.AspNet3.Controllers
 {
     public class ClientController : Controller
     {
+
+        private readonly ClienteRepository clienteRepository;
+        private readonly RepresentanteRepository representanteRepository;
+
+        public ClientController(DataContext dataContext)
+        {
+            clienteRepository = new ClienteRepository(dataContext);
+            representanteRepository = new RepresentanteRepository(dataContext); 
+        }
+
         [HttpGet]
         public IActionResult Index()
-        {/*GET*/
+        {
+            var listaClientes = clienteRepository.FindAll();
 
-            //Simulando Busca no BD
-            //Carregar Clientes
-
-            var listaClientes = new List<ClientModel>();
-
-            listaClientes.Add(new ClientModel
-            {
-                ClientId = 1,
-                Name = "Flávio",
-                Email = "fmoreni@gmail.com",
-                Birth = DateTime.Now,
-                Observation = "OBS1"
-            });
-
-            listaClientes.Add(new ClientModel
-            {
-                ClientId = 2,
-                Name = "Diogo",
-                Email = "fmoreni@gmail.com",
-                Birth = DateTime.Now,
-                Observation = "OBS1"
-            });
-
-            listaClientes.Add(new ClientModel
-            {
-                ClientId = 3,
-                Name = "Luan",
-                Email = "fmoreni@gmail.com",
-                Birth = DateTime.Now,
-                Observation = "OBS1"
-            });
-
-            listaClientes.Add(new ClientModel
-            {
-                ClientId = 4,
-                Name = "Thais",
-                Email = "fmoreni@gmail.com",
-                Birth = DateTime.Now,
-                Observation = "OBS1"
-            });
-
-            listaClientes.Add(new ClientModel
-            {
-                ClientId = 5,
-                Name = "Fernando",
-                Email = "fmoreni@gmail.com",
-                Birth = DateTime.Now,
-                Observation = "OBS1"
-            });
-
-            //ViewBag.MessageObs = "Mensagem de Teste da Obs";
-            //TempData["MessageTemp"] = "Mensagem temporária";
-
-            return View(listaClientes);/*Manda para a View esse Objeto*/
-        }/*Carregar Lista de Clientes*/
+            return View(listaClientes);
+        }
 
        
         public IActionResult NewClient()
         {
-            return View();
-        } /*Ir para a Pagina de Cadastro de um Novo Cliente*/
+            var listaRepresentantes = representanteRepository.FindAll();
+            ViewBag.representantes = listaRepresentantes;
+
+            return View( new ClientModel());
+        } 
 
         [HttpPost]
-        public IActionResult NewClient(ClientModel clientModel)/*Passar o Model desse Objeto*/
-        { /*View retorna Model Preenchido*/
-            if (ModelState.IsValid) /*Valida se tem algum dado faltando no Model*/
+        public IActionResult NewClient(ClientModel clientModel)
+        { 
+            if (ModelState.IsValid) 
             {
-
-                //Cadastrar Banco (BD FAKE)
+                clienteRepository.Insert(clientModel);
                 TempData["mensagem"] = "Cliente cadastrado com sucesso";/*Retorna Mensagem de Sucesso na View*/
 
-                //Exibir uma View de sucesso! Com a Mensagem acima
                 return RedirectToAction("Index");
             }
             else
             {
-                //Recuperar as informações do cliente digitado na View de Cadastro
-                // processo será o mesmo até o usuario Validar ou Cancelar a Alteração
+                var listaRepresentantes = representanteRepository.FindAll();
+                ViewBag.representantes = listaRepresentantes;
+
                 return View(clientModel);
             }
         }
@@ -95,18 +57,12 @@ namespace Fiap.Web.AspNet3.Controllers
         [HttpGet]
         public IActionResult Edit(int id)//Verificar com o professor
         {
-            var clientModel = new ClientModel
-            {
-                ClientId = 3,
-                Name = "Moreni",
-                Email = "moreni@gmail.com",
-                Birth = DateTime.Now,
-                Observation = "OBS3"
-            };
+            var cliente = clienteRepository.FindById(id);
+            var listaRepresentantes = representanteRepository.FindAll();
+            ViewBag.representantes = listaRepresentantes;
 
 
-
-            return View(clientModel);
+            return View(cliente);
         }
 
         [HttpPost]

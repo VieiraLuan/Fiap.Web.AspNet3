@@ -18,7 +18,6 @@
 
                     <input  asp-for="ClientId" name="ClientId" />
 
-
                     <div class="form-group">
                         <label class="control-label">Nome</label>
                         <input  readonly class="form-control col-5" asp-for="Name"  />
@@ -34,6 +33,16 @@
                     <div class="form-group">
                         <label class="control-label">Observação</label>
                         <textarea readonly class="form-control" asp-for="Observation" ></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label">Observação</label>
+                        <textarea readonly class="form-control" asp-for="@Model.RepresentanteId" ></textarea>
+                    </div>
+
+                     <div class="form-group">
+                        <label class="control-label">Nome Representante</label>
+                        <input readonly  class="form-control col-5" asp-for="@Model.Representante.NomeRepresentante" />
                     </div>
                     
                      <a href="/client" class="btn btn-warning btn-sm">Inicio</a>

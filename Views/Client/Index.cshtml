@@ -20,31 +20,30 @@
             <table class="table table-striped" border="1" cellspacing="0" cellpadding="0">
                 <thead>
                     <tr>
-                        <th data-field="id">Id</th>
-                        <th data-field="name">Nome</th>
-                        <th class="actions" width="220">Ações</th>
+                        <th data-field="id">ID</th>
+                        <th data-field="name">NOME</th>
+                        <th data-field="name">REPRESENTANTE</th>
+                        <th class="actions" width="220">AÇÕES</th>
                     </tr>
                 </thead>
                 <tbody>
 
 
                     @foreach (var client in Model)
-                    {/*Criamos para cada obj na lista do Model passado acima uma linha na Tabela
-                            e passamos campo a campo para exibição na tela
-
-                            asp-route serve para passar o id via HttpGet para fins de consulta , alteração e etc*/
-                        /* <tr>
-                        <td data-field="id">@client.ClientId </td>
-                        <td data-field="name">@client.Name </td>
-                        <td class="actions" width="220">
-                        <a asp-controller="Client" asp-action="Detales" asp-route-id="@client.ClientId" class="btn btn-info btn-sm">Detalhe</a>
-                        <a asp-controller="Client" asp-action="Edit" asp-route-id="@client.ClientId" class="btn btn-warning btn-sm">Editar</a>
-                        </td>
-                        </tr>*/
+                    {
+                        <tr>
+                            <td data-field="id">@client.ClientId </td>
+                            <td data-field="name">@client.Name </td>
+                            <td data-field="name">@client.Representante.NomeRepresentante</td>
+                            <td class="actions" width="220">
+                                <a asp-controller="Client" asp-action="Detales" asp-route-id="@client.ClientId" class="btn btn-info btn-sm">Detalhe</a>
+                                <a asp-controller="Client" asp-action="Edit" asp-route-id="@client.ClientId" class="btn btn-warning btn-sm">Editar</a>
+                            </td>
+                        </tr>
 
                         /*Mesma coisa que a de cima mas com conceito de partial view*/
 
-                        <partial name="_ClientItem" model="client" />
+                        /*@<partial name="_ClientItem" model="client" />*/
                     }
 
 

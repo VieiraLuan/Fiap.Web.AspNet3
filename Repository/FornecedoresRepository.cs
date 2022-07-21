@@ -3,16 +3,16 @@ using Fiap.Web.AspNet3.Models;
 
 namespace Fiap.Web.AspNet3.Repository
 {
+
     public class FornecedoresRepository
     {
 
         private readonly DataContext dtx;
 
 
-
         public FornecedoresRepository(DataContext dataContext)
         {
-            this.dtx = dataContext;
+            dtx = dataContext;
         }
 
         public List<FornecedorModel> FindAll()
@@ -31,24 +31,26 @@ namespace Fiap.Web.AspNet3.Repository
 
         }
 
-      /*  public FornecedorModel FindByName(FornecedorModel fornecedorModel) 
-        {
+        public FornecedorModel FindByName(FornecedorModel fornecedorModel) 
+          {
 
-            var fornecedor = dtx.Fornecedores.ToList();
+            var lista = FindAll();
+            int id = 0;
 
-            foreach (var f in fornecedor)
+            lista.ForEach(value =>
             {
-               var fornEncontrado = FindById(f.FornecedorId);
-
-                if(fornEncontrado != null)
+                if (value.FornecedorId.Equals(fornecedorModel.FornecedorNome))
                 {
-                    fornecedor = fornEncontrado;
-                    return ;
+                    id = Convert.ToInt32(value.FornecedorId);
+                    /*Devo colocar um Break ou Return aqui?*/
                 }
-            }
+
+            });
+
+            return FindById(id);
 
 
-        }*/
+        }
 
         /*Find By Name*/
 
@@ -59,10 +61,10 @@ namespace Fiap.Web.AspNet3.Repository
             dtx.SaveChanges();
         }
 
-        public void Update(FornecedorModel fornecedorModel) 
+        public void Update(FornecedorModel fornecedorModel)
         {
-           // var fornecedor = FindById(fornecedorModel.FornecedorId);
-            dtx.Fornecedores.Update(fornecedorModel);
+            var fornecedor = FindById(fornecedorModel.FornecedorId);
+            dtx.Fornecedores.Update(fornecedor);
             dtx.SaveChanges();
         }
 

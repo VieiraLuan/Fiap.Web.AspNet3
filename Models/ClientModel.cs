@@ -1,12 +1,16 @@
 ﻿using Microsoft.AspNetCore.Mvc; /*Biblioteca Padrão*/
 using System.ComponentModel.DataAnnotations;/*Biblioteca das Annotations*/
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Fiap.Web.AspNet3.Models
 {
+    [Table("ClientAsp")]
     public class ClientModel
     {
         [Display(Name = "Id do Cliente")]
         [HiddenInput] /*Aqui definimos se ele é visivel ou nao*/
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]   
         public int ClientId { get; set; }
 
 
@@ -25,8 +29,8 @@ namespace Fiap.Web.AspNet3.Models
 
         [Display(Name = "Data de Nascimento")]
         [Required(ErrorMessage = "Campo Obrigatório")]
-        [DataType(DataType.Date, ErrorMessage = "Campo Obrigatório")]
-        public DateTime? Birth { get; set; } /*Quando definimos DataType ou EmailAdrres
+        [DataType(DataType.Date, ErrorMessage = "O campo data é obrigatório")]
+        public DateTime Birth { get; set; } /*Quando definimos DataType ou EmailAdrres
                                               automaticamente no Form os campos se tornar do mesmo type*/
 
         /*Utilizamos ? para permitir que no html seja null, mas que 
@@ -39,5 +43,9 @@ namespace Fiap.Web.AspNet3.Models
         public string? Observation { get; set; }
 
 
+        public int RepresentanteId { get; set; }
+
+        [ForeignKey("RepresentanteId")]
+        public RepresentanteModel? Representante { get; set; }
     }
 }
