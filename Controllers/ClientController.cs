@@ -2,6 +2,7 @@
 using Fiap.Web.AspNet3.Models;
 using Fiap.Web.AspNet3.Repository;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace Fiap.Web.AspNet3.Controllers
 {
@@ -28,10 +29,16 @@ namespace Fiap.Web.AspNet3.Controllers
 
         public IActionResult NewClient()
         {
-            var listaRepresentantes = representanteRepository.FindAll();
-            ViewBag.representantes = listaRepresentantes;
+            ViewBag.representantes = ComboRepresentantes();
 
             return View(new ClientModel());
+        }
+
+        private SelectList ComboRepresentantes()
+        {
+            var listaRepresentantes = representanteRepository.FindAll();
+            var selectListRepresentantes = new SelectList(listaRepresentantes, "RepresentanteId", "NomeRepresentante");
+            return selectListRepresentantes;
         }
 
         [HttpPost]
@@ -46,8 +53,7 @@ namespace Fiap.Web.AspNet3.Controllers
             }
             else
             {
-                var listaRepresentantes = representanteRepository.FindAll();
-                ViewBag.representantes = listaRepresentantes;
+                ViewBag.representantes = ComboRepresentantes();
 
                 return View(clientModel);
             }
@@ -58,8 +64,8 @@ namespace Fiap.Web.AspNet3.Controllers
         public IActionResult Edit(int id)
         {
             var cliente = clienteRepository.FindById(id);
-            var listaRepresentantes = representanteRepository.FindAll();
-            ViewBag.representantes = listaRepresentantes;
+           
+            ViewBag.representantes = ComboRepresentantes();
 
 
             return View(cliente);
@@ -78,15 +84,13 @@ namespace Fiap.Web.AspNet3.Controllers
             }
             else
             {
-                var listaRepresentantes = representanteRepository.FindAll();
-                ViewBag.representantes = listaRepresentantes;
+                ViewBag.representantes = ComboRepresentantes();
                 return View(clientModel);
-
             }
 
         }
 
-        
+
         public IActionResult Detales(int id)
         {
             var cliente = clienteRepository.FindById(id);
@@ -94,10 +98,10 @@ namespace Fiap.Web.AspNet3.Controllers
             return View(cliente);
         }
 
-        
 
-       
-       
+
+
+
 
 
 

@@ -120,7 +120,7 @@ namespace Fiap.Web.AspNet3.Controllers
            
             var representanteModel = representanteRepository.FindById(id);
             
-            if (representanteModel != null)
+            if (representanteModel != null )
             {
                 representanteRepository.Delete(representanteModel);
             }
