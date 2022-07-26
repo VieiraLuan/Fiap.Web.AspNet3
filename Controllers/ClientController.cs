@@ -22,10 +22,43 @@ namespace Fiap.Web.AspNet3.Controllers
         public IActionResult Index()
         {
             //var listaClientes = clienteRepository.FindAllOrderByNomeAsc();
-            var listaClientes = clienteRepository.FindAllOrderByNomeDesc();
+            //var listaClientes = clienteRepository.FindAllOrderByNomeDesc();
             // var listaClientes = clienteRepository.FindAllOrderByNome("Luan");
+            ViewBag.representantes = ComboRepresentantes();
 
-            return View(listaClientes);
+            return View();
+        }
+
+
+        [HttpPost]
+        public IActionResult Pesquisar(ClientModel clientModel)
+        {
+
+            if (clientModel.Name == null && clientModel.Email == null && clientModel.RepresentanteId == 0)
+            {
+                TempData["mensagem"] = "Não foi encontrado nenhum resultado";
+                ViewBag.clientes = ListarTodosClientes();
+                ViewBag.representantes = ComboRepresentantes();
+            }
+            else
+            {
+                if(clientModel.Name == null)
+                {
+                    clientModel.Name = "";
+                }
+
+                if(clientModel.Email == null)
+                {
+                    clientModel.Email = "";
+                }
+
+                var clientes = clienteRepository.FindByNameAndEmailAndRepresentante
+                    (clientModel.Name, clientModel.Email, clientModel.RepresentanteId);
+                ViewBag.clientes = clientes;
+                ViewBag.representantes = ComboRepresentantes();
+            }
+
+            return View("Index");
         }
 
 
@@ -41,6 +74,11 @@ namespace Fiap.Web.AspNet3.Controllers
             var listaRepresentantes = representanteRepository.FindAll();
             var selectListRepresentantes = new SelectList(listaRepresentantes, "RepresentanteId", "NomeRepresentante");
             return selectListRepresentantes;
+        }
+
+        private List<ClientModel> ListarTodosClientes()
+        {
+            return clienteRepository.FindAll();
         }
 
         [HttpPost]
@@ -66,7 +104,7 @@ namespace Fiap.Web.AspNet3.Controllers
         public IActionResult Edit(int id)
         {
             var cliente = clienteRepository.FindById(id);
-           
+
             ViewBag.representantes = ComboRepresentantes();
 
 

@@ -1,4 +1,4 @@
-﻿@model IEnumerable<ClientModel> /*Carregamos a lista que vem do banco de dados*/
+﻿@model ClientModel;
 
 
 
@@ -16,7 +16,32 @@
 
             <p class="toolbar">
                 <a class="create btn btn-dark" asp-controller="Client" asp-action="NewClient">Novo Cliente</a>
+               
             </p>
+
+
+            <form asp-action="Pesquisar" asp-controller="Client" method="post">
+                <div class="form-group">
+                    <label class="control-label">Pesquisar o Nome</label>
+                    <input class="form-control col-5" asp-for="Name" />
+                </div>
+                <div class="form-group">
+                    <label class="control-label">Pesquisar Email</label>
+                    <input class="form-control col-5" asp-for="Email" />
+                </div>
+                <div class="form-group">
+                    <label class="control-label">Pesquisar Representante</label>
+                    <select class="form-control col-5" asp-for="RepresentanteId" asp-items="@ViewBag.representantes">
+                        <option value="">Selecione</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-primary btn-lg">Buscar</button>
+            </form>
+        </div>
+        @if (ViewBag.clientes != null)
+        {
+
+
             <table class="table table-striped" border="1" cellspacing="0" cellpadding="0">
                 <thead>
                     <tr>
@@ -28,8 +53,7 @@
                 </thead>
                 <tbody>
 
-
-                    @foreach (var client in Model)
+                    @foreach (var client in ViewBag.clientes)
                     {
                         <tr>
                             <td data-field="id">@client.ClientId </td>
@@ -38,7 +62,7 @@
                             <td class="actions" width="220">
                                 <a asp-controller="Client" asp-action="Detales" asp-route-id="@client.ClientId" class="btn btn-info btn-sm">Detalhe</a>
                                 <a asp-controller="Client" asp-action="Edit" asp-route-id="@client.ClientId" class="btn btn-warning btn-sm">Editar</a>
-                                
+
                             </td>
                         </tr>
 
@@ -48,9 +72,14 @@
                     }
 
 
+
+
+
                 </tbody>
             </table>
-        </div>
+
+        }
+
     </div>
 </div>
 

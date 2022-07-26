@@ -49,5 +49,8 @@ namespace Fiap.Web.AspNet3.Models
 
         [ForeignKey("RepresentanteId")]
         public RepresentanteModel? Representante { get; set; }
+
+       
+
     }
 }
