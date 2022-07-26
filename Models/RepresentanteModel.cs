@@ -30,5 +30,7 @@ namespace Fiap.Web.AspNet3.Models
         /*[NotMapped]
         public string Token { get; set; }*/
 
+        public ICollection<ClientModel> Clientes { get; set; }
+
     }
 }

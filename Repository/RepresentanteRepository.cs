@@ -1,5 +1,6 @@
 ﻿using Fiap.Web.AspNet3.Data;
 using Fiap.Web.AspNet3.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace Fiap.Web.AspNet3.Repository
 {
@@ -18,8 +19,14 @@ namespace Fiap.Web.AspNet3.Repository
 
         }
 
-        public RepresentanteModel FindById(int id) {
+        public RepresentanteModel? FindById(int id) {
             return dataContext.Representantes.Find(id);
+        }
+
+        public RepresentanteModel? FindByIdWithClientes(int id)
+        {
+            return dataContext.Representantes.Include(r => r.Clientes).
+                SingleOrDefault(r => r.RepresentanteId== id);
         }
 
         public List<RepresentanteModel> FindByName(string name)

@@ -43,6 +43,8 @@ namespace Fiap.Web.AspNet3.Models
         public string? Observation { get; set; }
 
 
+
+
         public int RepresentanteId { get; set; }
 
         [ForeignKey("RepresentanteId")]
