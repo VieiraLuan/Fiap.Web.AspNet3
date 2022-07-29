@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using Fiap.Web.AspNet3.Data;
 using Fiap.Web.AspNet3.Models;
 using Fiap.Web.AspNet3.Repository;
+using Fiap.Web.AspNet3.Repository.Interface;
 
 namespace Fiap.Web.AspNet3.Controllers
 {
@@ -10,11 +11,11 @@ namespace Fiap.Web.AspNet3.Controllers
     {
 
 
-        private readonly RepresentanteRepository representanteRepository;
+        private readonly IRepresentanteRepository representanteRepository;
 
-        public RepresentanteController(DataContext context)
+        public RepresentanteController(IRepresentanteRepository repository)
         {
-            representanteRepository = new RepresentanteRepository(context);
+            representanteRepository = repository;
         }
 
 

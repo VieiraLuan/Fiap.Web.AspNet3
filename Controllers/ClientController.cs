@@ -1,6 +1,7 @@
 ﻿using Fiap.Web.AspNet3.Data;
 using Fiap.Web.AspNet3.Models;
 using Fiap.Web.AspNet3.Repository;
+using Fiap.Web.AspNet3.Repository.Interface;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
@@ -9,13 +10,13 @@ namespace Fiap.Web.AspNet3.Controllers
     public class ClientController : Controller
     {
 
-        private readonly ClienteRepository clienteRepository;
-        private readonly RepresentanteRepository representanteRepository;
+        private readonly IClienteRepository clienteRepository;
+        private readonly IRepresentanteRepository representanteRepository;
 
-        public ClientController(DataContext dataContext)
+        public ClientController(IClienteRepository cliente,IRepresentanteRepository representante)
         {
-            clienteRepository = new ClienteRepository(dataContext);
-            representanteRepository = new RepresentanteRepository(dataContext);
+            clienteRepository = cliente;
+            representanteRepository = representante;
         }
 
         [HttpGet]
@@ -36,7 +37,7 @@ namespace Fiap.Web.AspNet3.Controllers
 
             if (clientModel.Name == null && clientModel.Email == null && clientModel.RepresentanteId == 0)
             {
-                TempData["mensagem"] = "Não foi encontrado nenhum resultado";
+                TempData["mensagem"] = "Não foi encontrado nenhum resultado para essa pesquisa, mas veja abaixo os clientes cadastrados";
                 ViewBag.clientes = ListarTodosClientes();
                 ViewBag.representantes = ComboRepresentantes();
             }
@@ -76,7 +77,7 @@ namespace Fiap.Web.AspNet3.Controllers
             return selectListRepresentantes;
         }
 
-        private List<ClientModel> ListarTodosClientes()
+        private IList<ClientModel> ListarTodosClientes()
         {
             return clienteRepository.FindAll();
         }
@@ -137,10 +138,6 @@ namespace Fiap.Web.AspNet3.Controllers
 
             return View(cliente);
         }
-
-
-
-
 
 
 

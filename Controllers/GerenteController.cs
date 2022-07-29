@@ -3,17 +3,17 @@ using Microsoft.EntityFrameworkCore;
 using Fiap.Web.AspNet3.Data;
 using Fiap.Web.AspNet3.Models;
 using Fiap.Web.AspNet3.Repository;
+using Fiap.Web.AspNet3.Repository.Interface;
 
 namespace Fiap.Web.AspNet3.Controllers
 {
     public class GerenteController : Controller
     {
-        private readonly GerenteRepository gerenteRepository;
+        private readonly IGerenteRepository gerenteRepository;
 
-        public GerenteController(DataContext dataContext)
+        public GerenteController(IGerenteRepository gerente)
         {
-
-            gerenteRepository = new GerenteRepository(dataContext);
+            this.gerenteRepository = gerente;
         }
 
 

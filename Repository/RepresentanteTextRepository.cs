@@ -5,29 +5,31 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Fiap.Web.AspNet3.Repository
 {
-    public class RepresentanteRepository:IRepresentanteRepository
+    public class RepresentanteTextRepository : IRepresentanteRepository
     {
         private readonly DataContext dataContext;
 
-        public RepresentanteRepository(DataContext dataContext)
+        public RepresentanteTextRepository(DataContext dataContext)
         {
             this.dataContext = dataContext;
         }
 
-        public IList<RepresentanteModel> FindAll() {
+        public IList<RepresentanteModel> FindAll()
+        {
 
-           return dataContext.Representantes.ToList<RepresentanteModel>();
+            return dataContext.Representantes.ToList<RepresentanteModel>();
 
         }
 
-        public RepresentanteModel? FindById(int id) {
+        public RepresentanteModel? FindById(int id)
+        {
             return dataContext.Representantes.Find(id);
         }
 
         public RepresentanteModel? FindByIdWithClientes(int id)
         {
             return dataContext.Representantes.Include(r => r.Clientes).
-                SingleOrDefault(r => r.RepresentanteId== id);
+                SingleOrDefault(r => r.RepresentanteId == id);
         }
 
         public IList<RepresentanteModel> FindByName(string name)
@@ -35,13 +37,15 @@ namespace Fiap.Web.AspNet3.Repository
             return null;
         }
 
-        public void Insert(RepresentanteModel representanteModel) {
+        public void Insert(RepresentanteModel representanteModel)
+        {
             dataContext.Representantes.Add(representanteModel);
             //e
             dataContext.SaveChanges();
         }
 
-        public void Update(RepresentanteModel representanteModel) {
+        public void Update(RepresentanteModel representanteModel)
+        {
             dataContext.Representantes.Update(representanteModel);
             dataContext.SaveChanges();
         }
@@ -56,9 +60,6 @@ namespace Fiap.Web.AspNet3.Repository
             dataContext.Representantes.Remove(representanteModel);
             dataContext.SaveChanges();
         }
-
-       
-
 
     }
 }

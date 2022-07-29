@@ -1,24 +1,25 @@
 ﻿using Fiap.Web.AspNet3.Data;
 using Fiap.Web.AspNet3.Models;
+using Fiap.Web.AspNet3.Repository.Interface;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
 
 namespace Fiap.Web.AspNet3.Repository
 {
-    public class ClienteRepository
+    public class ClienteRepository:IClienteRepository
     {
         public DataContext context { get; set; }
         public ClienteRepository(DataContext ctx)
         {
             context = ctx;
         }
-        public List<ClientModel> FindAll()
+        public IList<ClientModel> FindAll()
         {
             var listaclientes = context.Clients.Include(c => c.Representante).ToList();
             return listaclientes;
         }
 
-        public List<ClientModel> FindAllOrderByNomeAsc()
+        public IList<ClientModel> FindAllOrderByNomeAsc()
         {
             var listaclientes = context.Clients.
                 Include(c => c.Representante).
@@ -28,7 +29,7 @@ namespace Fiap.Web.AspNet3.Repository
             return listaclientes;
         }
 
-        public List<ClientModel> FindAllOrderByNomeDesc()
+        public IList<ClientModel> FindAllOrderByNomeDesc()
         {
             var listaclientes = context.Clients.
                 Include(c => c.Representante).
@@ -66,7 +67,7 @@ namespace Fiap.Web.AspNet3.Repository
             context.SaveChanges();
         }
 
-        public List<ClientModel> FindByName(string name)
+        public IList<ClientModel> FindByName(string name)
         {
             var listaclientes = context.Clients.
                Include(c => c.Representante).
@@ -75,7 +76,7 @@ namespace Fiap.Web.AspNet3.Repository
             return listaclientes;
         }
 
-        public List<ClientModel> FindByNameAndEmail(string name, string email)
+        public IList<ClientModel> FindByNameAndEmail(string name, string email)
         {
             var listaclientes = context.Clients.
                Include(c => c.Representante).
@@ -84,7 +85,7 @@ namespace Fiap.Web.AspNet3.Repository
             return listaclientes;
         }
 
-        public List<ClientModel> FindByNameAndEmailAndRepresentante(string name, string email, int Idrepresentante)
+        public IList<ClientModel> FindByNameAndEmailAndRepresentante(string name, string email, int Idrepresentante)
         {
             var listaclientes = context.Clients.
                Include(c => c.Representante).
